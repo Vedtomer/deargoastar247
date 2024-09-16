@@ -7,7 +7,12 @@
         content="Goastar247, number game, lucky draw, 15-minute draw, game results, online lottery, game, draw results, lucky game">
     <title>Goastar247</title>
     <meta name="google-site-verification" content="MpDrHASfn4wAgG4z4dw9SbNV_UBiZ2mC2wWUPlnJuxU" />
-    @laravelPWA
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
 
     <style>
         * {
