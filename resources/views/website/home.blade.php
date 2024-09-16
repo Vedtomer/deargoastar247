@@ -311,7 +311,7 @@
                     const tds = row.querySelectorAll('td');
 
                     // Apply color to <th> elements
-                    th.style.backgroundColor = rowIndex % 2 === 0 ? '#008001' : '#0000FF';
+                    th.style.backgroundColor = rowIndex % 2 === 0 ? '#008001' : '#010080';
                     th.style.color = rowIndex % 2 === 0 ? '#000000' : '#FFFFFF';
 
                     // Determine the background color for 'samecolor' cells based on row index
