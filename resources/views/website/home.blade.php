@@ -298,6 +298,20 @@
 
 
     <script>
+        // At the beginning of your script, add these helper functions
+        function isToday(date) {
+            const today = new Date();
+            return date.getDate() === today.getDate() &&
+                date.getMonth() === today.getMonth() &&
+                date.getFullYear() === today.getFullYear();
+        }
+
+        function isBeforeNineThirtyPM() {
+            const now = new Date();
+            const nineThirtyPM = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 21, 30, 0);
+            return now < nineThirtyPM;
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             const dateInput = document.querySelector('.date-input');
             const refreshBtn = document.querySelector('.refresh-btn');
@@ -374,7 +388,7 @@
                 });
 
                 // Display the latest result in the specified IDs
-                if (processedDraws.length > 0) {
+                if (processedDraws.length > 0 && isToday(new Date(selectedDate.value)) && isBeforeNineThirtyPM()) {
                     const latestDraw = processedDraws[processedDraws.length - 1]; // Get the last result
 
                     // Set the latest draw data in the respective spans
