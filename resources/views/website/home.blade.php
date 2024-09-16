@@ -2,13 +2,6 @@
 
 @section('styles')
     <style>
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-        }
-
         .refresh-btn {
             margin-left: 10px;
         }
@@ -18,21 +11,8 @@
             margin: 20px 0;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
 
-        th,
-        td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-        }
 
-        th {
-            background-color: #f2f2f2;
-        }
 
         .banner {
             position: relative;
@@ -41,12 +21,6 @@
             margin: auto;
         }
 
-        .banner-image {
-            width: 100%;
-
-            height: 75vh;
-            display: block;
-        }
 
         .overlay-text {
             position: absolute;
@@ -79,16 +53,16 @@
 
             }
 
-            th,
-            td {
-                border: 1px solid #1da0b4;
-                padding: 4px 2px;
-                text-align: center;
-            }
+            /* th,
+                                        td {
+                                            border: 1px solid #1da0b4;
+                                            padding: 4px 2px;
+                                            text-align: center;
+                                        }
 
-            th {
-                font-size: 12px
-            }
+                                        th {
+                                            font-size: 12px
+                                        } */
         }
 
         .overlay {
@@ -112,82 +86,6 @@
             opacity: 1;
         }
 
-        .popup {
-            background: #fff;
-            border-radius: 10px;
-            width: 300px;
-            position: relative;
-            transition: all 0.3s ease-in-out;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .popup .app-icon {
-            width: 60px;
-            height: 60px;
-            margin-bottom: 10px;
-        }
-
-        .popup h3 {
-            margin: 10px 0;
-            font-size: 1.5em;
-            color: #333;
-        }
-
-        .popup p {
-            margin: 10px 0;
-            font-size: 1em;
-            color: #666;
-        }
-
-        .button-container {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-
-        .popup button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            flex-grow: 1;
-            margin: 0 5px;
-        }
-
-        .popup #installBtn {
-            background-color: black;
-            color: white;
-        }
-
-        .popup #cancelBtn {
-            /* background: none; */
-            color: black;
-        }
-
-        @media screen and (max-width: 700px) {
-            .popup {
-                width: 70%;
-            }
-        }
-
-        .table-container {
-            width: 100%;
-            overflow-x: auto;
-        }
-
-        #dataTable {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        @media screen and (max-width: 600px) {
-            .table-container {
-                width: 100%;
-                overflow-x: auto;
-            }
-        }
 
         .container {
             display: flex;
@@ -217,9 +115,68 @@
             cursor: pointer;
             margin-left: 10px;
         }
+    </style>
 
-        .install-icon {
-            cursor: pointer;
+    <style>
+        .table-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            overflow-x: auto;
+        }
+
+        #dataTable {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 3px;
+            font-size: 18px;
+        }
+
+        #dataTable th,
+        #dataTable td {
+            border: 2px solid #FFD700;
+            padding: 10px;
+            text-align: center;
+        }
+
+        #dataTable thead th {
+            background-color: #808080;
+            color: white;
+            font-size: 20px;
+            border-bottom: 4px solid #FFD700;
+        }
+
+        /* tbody th:nth-child(even) {
+                        background-color: #008001;
+                    }
+
+                    tbody th:nth-child(odd) {
+                        background-color: #0000FF;
+                    }
+
+                    tbody td:nth-child(odd) {
+                        background-color: #fea500;
+                    }
+
+
+                    tbody td:nth-child(odd) {
+                        background-color: #FFFF;
+                    } */
+
+
+
+        .time-column {
+            color: white;
+        }
+
+        @media (max-width: 600px) {
+            #dataTable {
+                font-size: 14px;
+            }
+
+            #dataTable th {
+                font-size: 16px;
+            }
         }
     </style>
 @endsection
@@ -229,7 +186,8 @@
         {{-- <img src="{{ asset('banner.jpeg') }}" alt="Banner Image" class="banner-image"> --}}
 
 
-        <marquee width="100%" direction="left" height="100px" style="color: white;font-weight:bolder">WELCOME TO DEAR GOA STAR247</marquee>
+        <marquee width="100%" direction="left" height="100px" style="color: white;font-weight:bolder">WELCOME TO DEAR GOA
+            STAR247</marquee>
 
         <p id="draw-time-info" class="overlay-text">Next Draw Time: | Remaining Time: </p>
     </div>
@@ -237,7 +195,8 @@
 
     <div class="container">
         <div class="date-selector">
-            <input type="date" class="date-input" id="selectedDate" value="{{ request()->input('date', date('Y-m-d')) }}">
+            <input type="date" class="date-input" id="selectedDate"
+                value="{{ request()->input('date', date('Y-m-d')) }}">
             <a class="refresh-btn" onclick="location.reload();" title="refresh">
                 <svg width="32px" height="32px" viewBox="-2.4 -2.4 28.80 28.80" fill="none"
                     xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
@@ -270,16 +229,14 @@
                 </svg>
             </div>
         </div>
+
         <div class="table-container">
             <table id="dataTable" style="display: none;">
                 <thead>
                     <tr>
-                        <th>TIME</th>
-                        <th>A</th>
-                        <th>B</th>
-                        <th>A</th>
-                        <th>B</th>
-
+                        <th>Time</th>
+                        <th>गोल्डन लक्ष्मी</th>
+                        <th>शुभ लक्ष्मी</th>
                     </tr>
                 </thead>
                 <tbody id="tableBody">
@@ -288,4 +245,188 @@
             </table>
         </div>
     </div>
+
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const dateInput = document.querySelector('.date-input');
+            const refreshBtn = document.querySelector('.refresh-btn');
+            const dateDisplay = document.querySelector('.date-display');
+            const loaderContainer = document.getElementById('loaderContainer');
+            const dataTable = document.getElementById('dataTable');
+            const tableBody = document.getElementById('tableBody');
+            const selectedDate = document.getElementById('selectedDate');
+            const installIcon = document.querySelector('.install-icon');
+
+
+
+
+            function updateDate() {
+                const selectedDate = new Date(dateInput.value);
+                const formattedDate = selectedDate.toLocaleDateString('en-GB').split('/').join('-');
+                dateDisplay.textContent = `Date: ${formattedDate}`;
+            }
+
+            function showLoader() {
+                loaderContainer.style.display = 'flex';
+                dataTable.style.display = 'none';
+            }
+
+            function hideLoader() {
+                loaderContainer.style.display = 'none';
+                dataTable.style.display = 'table';
+            }
+
+            function processDraws(drawsData) {
+                return Array.isArray(drawsData) ? drawsData :
+                    (typeof drawsData === 'object' && drawsData !== null) ? Object.values(drawsData) : [];
+            }
+
+            function formatNumber(num) {
+                return num;
+                return num < 10 ? '0' + num : num;
+            }
+
+            function updateTable(draws) {
+                const processedDraws = processDraws(draws);
+
+                // Populate the table with rows
+                tableBody.innerHTML = processedDraws.length > 0 ?
+                    processedDraws.map((draw, index) => `
+            <tr>
+                <th>${draw.draw_time}</th>
+                <td class='samecolor'>${formatNumber(draw.a)}${formatNumber(draw.b)}</td>
+                <td class='samecolor'>${formatNumber(draw.c)}${formatNumber(draw.d)}</td>
+            </tr>
+        `).join('') :
+                    '<tr><td colspan="3">No data available</td></tr>';
+
+                // Apply styles to the table after the rows are inserted
+                const rows = tableBody.querySelectorAll('tr');
+
+                rows.forEach((row, rowIndex) => {
+                    const th = row.querySelector('th');
+                    const tds = row.querySelectorAll('td');
+
+                    // Apply color to <th> elements
+                    th.style.backgroundColor = rowIndex % 2 === 0 ? '#008001' : '#0000FF';
+                    th.style.color = rowIndex % 2 === 0 ? '#000000' : '#FFFFFF';
+
+                    // Determine the background color for 'samecolor' cells based on row index
+                    const sameColorBg = rowIndex % 2 === 0 ? '#fea500' : '#FFFFFF';
+
+                    // Apply color to <td> elements
+                    tds.forEach(td => {
+                        if (td.classList.contains('samecolor')) {
+                            td.style.backgroundColor = sameColorBg;
+                        }
+                    });
+                });
+            }
+
+            function fetchDraws(date) {
+                showLoader();
+
+                // Create a promise that resolves after 2 seconds
+                const delay = new Promise(resolve => setTimeout(resolve, 2000));
+
+                // Fetch data
+                const fetchData = fetch('/get-draws?date=' + date)
+                    .then(response => response.json());
+
+                // Wait for both the delay and the fetch to complete
+                Promise.all([delay, fetchData])
+                    .then(([_, data]) => {
+                        hideLoader();
+                        updateTable(data);
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        hideLoader();
+                        alert('An error occurred while fetching data.');
+                    });
+            }
+
+            dateInput.addEventListener('change', updateDate);
+            refreshBtn.addEventListener('click', () => location.reload());
+            selectedDate.addEventListener('change', e => fetchDraws(e.target.value));
+            // installIcon.addEventListener('click', () => console.log('Install icon clicked'));
+
+            // Initial load
+            const today = new Date().toISOString().split('T')[0];
+            selectedDate.value = today;
+            fetchDraws(today);
+        });
+
+        // PWA installation
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+        });
+
+
+
+
+
+
+        function updateNextDrawTime() {
+            const currentTime = new Date();
+            const drawTimes = [];
+
+            // Generate all draw times for the day
+            for (let hour = 9; hour <= 21; hour++) {
+                drawTimes.push(new Date(currentTime.getFullYear(), currentTime.getMonth(), currentTime.getDate(), hour, 0,
+                    0, 0));
+                drawTimes.push(new Date(currentTime.getFullYear(), currentTime.getMonth(), currentTime.getDate(), hour, 30,
+                    0, 0));
+            }
+
+            // Find the next draw time
+            // console.log(drawTimes);
+            let nextDrawTime = drawTimes.find(time => time > currentTime);
+
+            // If no draw time found today, set it to the first draw time tomorrow
+            if (!nextDrawTime) {
+                nextDrawTime = new Date(currentTime.getFullYear(), currentTime.getMonth(), currentTime.getDate() + 1, 9, 0,
+                    0, 0);
+            }
+
+            const nextDrawTimeString = nextDrawTime.toLocaleTimeString([], {
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true
+            });
+            updateRemainingTime(nextDrawTime, nextDrawTimeString);
+
+            setTimeout(updateNextDrawTime, 60000); // Refresh every minute
+        }
+
+        function updateRemainingTime(nextDrawTime, nextDrawTimeString) {
+            const currentTime = new Date();
+            const timeDifference = nextDrawTime - currentTime;
+
+            const hours = Math.floor(timeDifference / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+            const remainingTimeString = `${padZero(hours)} : ${padZero(minutes)} : ${padZero(seconds)}`;
+
+            document.getElementById('draw-time-info').innerText =
+                `Next Draw Time: ${nextDrawTimeString} | ${remainingTimeString}`;
+
+            // Update remaining time every second
+            setTimeout(() => updateRemainingTime(nextDrawTime, nextDrawTimeString), 1000);
+        }
+
+        function padZero(number) {
+            return number < 10 ? '0' + number : number;
+        }
+
+        // Initialize the function on page load
+        document.addEventListener('DOMContentLoaded', updateNextDrawTime);
+    </script>
+    @yield('scripts')
 @endsection
