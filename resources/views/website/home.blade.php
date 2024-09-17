@@ -472,7 +472,7 @@
             for (let hour = 9; hour <= 21; hour++) {
                 drawTimes.push(new Date(currentTime.getFullYear(), currentTime.getMonth(), currentTime.getDate(), hour, 0,
                     0, 0));
-                drawTimes.push(new Date(currentTime.getFullYear(), currentTime.getMonth(), currentTime.getDate(), hour, 30,
+                drawTimes.push(new Date(currentTime.getFullYear(), currentTime.getMonth(), currentTime.getDate(), hour, 15,
                     0, 0));
             }
 
