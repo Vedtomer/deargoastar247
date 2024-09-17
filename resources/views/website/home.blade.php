@@ -120,7 +120,7 @@
                 </div>
 
                 <div class="rounded"
-                    style="text-align: center;  width: 100%; color: blue; font-weight: bold; text-align: center; display: inline-block; ">
+                    style="text-align: center;  width: 100%; color: blue; font-weight: bold; text-align: center; display: inline-block;padding:5px">
 
                     <div class="rounded" style="border-style: thick; border-color: red; width: 100%">
 
