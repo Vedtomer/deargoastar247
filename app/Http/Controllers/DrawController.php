@@ -190,7 +190,7 @@ class DrawController extends Controller
         $endDate = '2026-01-01';
         $startTime = strtotime('09:00 AM');
         $endTime = strtotime('09:00 PM');
-        $interval = 30 * 60; // 30 minutes in seconds
+        $interval = 15 * 60; // 30 minutes in seconds
         $currentDate = $startDate;
         while (strtotime($currentDate) <= strtotime($endDate)) {
             $existingDrawsCount = Draw::where('date', $currentDate)->count();

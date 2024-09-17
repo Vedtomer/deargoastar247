@@ -31,7 +31,7 @@
                                 aria-label="Select Time" required>
                                 <option value="">Select Time</option>
                                 @for ($hour = 9; $hour <= 21; $hour++)
-                                    @for ($minute = 0; $minute < 60; $minute += 30)
+                                    @for ($minute = 0; $minute < 60; $minute += 15)
                                         @php
                                             $time = sprintf('%02d:%02d', $hour, $minute);
                                             $formattedTime = date('h:i A', strtotime($time));
@@ -41,7 +41,7 @@
                                             {{ $storedTime == $formattedTime ? 'selected' : '' }}>
                                             {{ $formattedTime }}
                                         </option>
-                                        @if ($hour == 21 && $minute == 30)
+                                        @if ($hour == 21 && $minute == 00)
                                         @break
                                     @endif
                                 @endfor
@@ -75,7 +75,7 @@
                         <input type="text" class="form-control" id="d" name="d"
                             value="{{ substr($draw->d, -2) }}" required maxlength="2">
                     </div>
-                    <div class="col-md-6">
+                    {{-- <div class="col-md-6">
                         <label for="e" class="form-label">E <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="e" name="e"
                             value="{{ substr($draw->e, -2) }}" required maxlength="2">
@@ -104,7 +104,7 @@
                         <label for="j" class="form-label">J <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="j" name="j"
                             value="{{ substr($draw->j, -2) }}" required maxlength="2">
-                    </div>
+                    </div> --}}
 
                     <div class="col-12">
                         <button type="submit" class="btn btn-primary">Update</button>
