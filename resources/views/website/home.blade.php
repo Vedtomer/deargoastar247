@@ -60,6 +60,11 @@
             border-bottom: 4px solid #FFD700;
         }
 
+        td {
+            font-size: 20px;
+            font-weight: bolder;
+        }
+
         .time-column {
             color: white;
         }
@@ -360,7 +365,7 @@
             <tr>
                 <th>${draw.draw_time}</th>
                 <td class='samecolor'>${formatNumber(draw.a)}${formatNumber(draw.b)}</td>
-                <td class='samecolor'>${formatNumber(draw.c)}${formatNumber(draw.d)}</td>
+                <td class='samecolor2'>${formatNumber(draw.c)}${formatNumber(draw.d)}</td>
             </tr>
         `).join('') :
                     '<tr><td colspan="3">No data available</td></tr>';
@@ -373,16 +378,24 @@
                     const tds = row.querySelectorAll('td');
 
                     // Apply color to <th> elements
-                    th.style.backgroundColor = rowIndex % 2 === 0 ? '#008001' : '#010080';
-                    th.style.color = rowIndex % 2 === 0 ? '#000000' : '#FFFFFF';
+                    th.style.backgroundColor = rowIndex % 2 === 0 ? '#2905ff' : '#2905ff';
+                    th.style.color = rowIndex % 2 === 0 ? '#FFFFFF' : '#FFFFFF';
 
                     // Determine the background color for 'samecolor' cells based on row index
-                    const sameColorBg = rowIndex % 2 === 0 ? '#fea500' : '#FFFFFF';
+                    const sameColorBg = rowIndex % 2 === 0 ? '#fea500' : '#fea500';
+                    const sameColorBg2 = rowIndex % 2 === 0 ? '#2905ff' : '#2905ff';
 
                     // Apply color to <td> elements
                     tds.forEach(td => {
                         if (td.classList.contains('samecolor')) {
                             td.style.backgroundColor = sameColorBg;
+                        }
+                    });
+
+                    tds.forEach(td => {
+                        if (td.classList.contains('samecolor2')) {
+                            td.style.backgroundColor = sameColorBg2;
+                            td.style.color = rowIndex % 2 === 0 ? '#FFFFFF' : '#FFFFFF';
                         }
                     });
                 });
