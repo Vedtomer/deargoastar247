@@ -7,6 +7,9 @@ use App\Models\Draw;
 use Illuminate\Support\Carbon;
 
 
+use Illuminate\Support\Facades\DB;
+
+
 class HomeController extends Controller
 {
     public function index(Request $request)
@@ -104,5 +107,48 @@ class HomeController extends Controller
         return $draws->map(function ($draw) {
             return $draw->toArray();
         });
+    }
+    public function getMonthlyDraws(Request $request)
+    {
+        $month = $request->input('month');
+        $year = $request->input('year');
+        $game = $request->input('game');
+
+        $startDate = Carbon::create($year, $month, 1)->startOfMonth();
+        $endDate = Carbon::create($year, $month, 1)->endOfMonth();
+        $now = Carbon::now();
+
+        // If the requested month and year are in the future, return an empty result
+        if ($startDate > $now) {
+            return response()->json([]);
+        }
+
+        // Adjust end date to be no later than the current date
+        $endDate = min($endDate, $now);
+
+        $query = Draw::whereBetween('date', [$startDate, $endDate]);
+
+        if ($game == 1) {
+            $query->select('id', 'draw_time', 'date', DB::raw("CONCAT(a, b) as result"));
+        } elseif ($game == 2) {
+            $query->select('id', 'draw_time', 'date', DB::raw("CONCAT(c, d) as result"));
+        } else {
+            // Default case: return all columns
+            $query->select('id', 'draw_time', 'date', 'a', 'b', 'c', 'd');
+        }
+
+        $query->where(function ($q) use ($now) {
+            $q->where('date', '<', $now->toDateString())
+              ->orWhere(function ($q) use ($now) {
+                  $q->where('date', '=', $now->toDateString())
+                    ->where('draw_time', '<=', $now->subSeconds(20)->format('H:i:s'));
+              });
+        });
+
+        $draws = $query->orderBy('date')
+            ->orderBy('draw_time')
+            ->get();
+
+        return response()->json($draws);
     }
 }

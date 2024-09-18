@@ -1,83 +1,29 @@
-monthresult@extends('website.layouts.app')
+@extends('website.layouts.app')
 
 @section('styles')
     <style>
-        .refresh-btn {
-            margin-left: 10px;
-        }
 
-        .date-display {
-            text-align: center;
-            margin: 20px 0;
-        }
+table{
+    width: 100%;
+}
 
-
-        .date-selector {
-            display: flex;
-            align-items: center;
-        }
-
-        .date-input {
-            padding: 5px;
-            font-size: 16px;
-            border: 1px solid #0056b3;
-            border-radius: 4px;
-            /* margin-right: 10px; */
-        }
-
-        .refresh-btn {
-            cursor: pointer;
-            margin-left: 10px;
-        }
-    </style>
-
-    <style>
-        .table-container {
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
-            overflow-x: auto;
-        }
-
-        #dataTable {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 3px;
-            font-size: 18px;
-        }
-
-        #dataTable th,
-        #dataTable td {
-            border: 2px solid #FFD700;
-            padding: 10px;
-            text-align: center;
-        }
-
-        #dataTable thead th {
-            background-color: #808080;
-            color: white;
-            font-size: 20px;
-            border-bottom: 4px solid #FFD700;
-        }
-
+       th,
         td {
-            font-size: 20px;
-            font-weight: bolder;
+            border: 1px solid black;
+            padding: 5px;
+            text-align: center;
         }
 
-        .time-column {
+        th {
+            background-color: #003366;
             color: white;
         }
 
-        @media (max-width: 600px) {
-            #dataTable {
-                font-size: 14px;
-            }
-
-            #dataTable th {
-                font-size: 16px;
-            }
+        .result-slot {
+            background-color: #003366;
+            color: white;
         }
+
 
         .btn-g20 {
             background: #a41c1c;
@@ -86,7 +32,19 @@ monthresult@extends('website.layouts.app')
             font-size: 14px;
             font-family: Arial;
         }
+
+        .form-container {
+            max-width: 500px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+
+
     </style>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -247,6 +205,132 @@ monthresult@extends('website.layouts.app')
 
 
 
+    <div class="container">
+        <div class="form-container">
+            <h1 class="text-center mb-4">RESULTS</h1>
 
+            <form id="resultsForm">
+                <div class="mb-3">
+                    <label for="month" class="form-label">Select Month-Year:</label>
+                    <div class="row">
+                        <div class="col-md-6 mb-2 mb-md-0">
+                            <select id="month" name="month" class="form-select">
+                                @php
+                                    $currentMonth = date('n');
+                                    for ($m = 1; $m <= 12; $m++) {
+                                        $monthName = date('F', mktime(0, 0, 0, $m, 1));
+                                        $selected = ($m == $currentMonth) ? 'selected' : '';
+                                @endphp
+                                <option value="{{ $m }}" {{ $selected }}>{{ $monthName }}</option>
+                                @php
+                                    }
+                                @endphp
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <select id="year" name="year" class="form-select">
+                                @php
+                                    $currentYear = date('Y');
+                                    $startYear = $currentYear - 5; // Adjust as needed
+                                    $endYear = $currentYear + 5;   // Adjust as needed
+                                    for ($y = $startYear; $y <= $endYear; $y++) {
+                                        $selected = ($y == $currentYear) ? 'selected' : '';
+                                @endphp
+                                <option value="{{ $y }}" {{ $selected }}>{{ $y }}</option>
+                                @php
+                                    }
+                                @endphp
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="game" class="form-label">Select Game:</label>
+                    <select id="game" name="game" class="form-select">
+                        <option value="1">गोल्डन लक्ष्मी</option>
+                        <option value="2">शुभ लक्ष्मी</option>
+                        <!-- Add other games as needed -->
+                    </select>
+                </div>
+
+                <div class="d-grid">
+                    <button type="button" id="showResults" class="btn btn-primary btn-lg">Show Results</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+    <div class="container">
+
+    <div id="resultsTable"></div>
+        </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#showResults').click(function() {
+                var month = $('#month').val();
+                var year = $('#year').val();
+                var game = $('#game').val();
+
+                $.ajax({
+                    url: '/get-monthly-draws',
+                    method: 'GET',
+                    data: {
+                        month: month,
+                        year: year,
+                        game: game
+                    },
+                    success: function(response) {
+                        var tableHtml = '<table>';
+                        tableHtml += '<tr><th>Result Slot</th>';
+                        for (var i = 1; i <= 31; i++) {
+                            tableHtml += '<th>' + i + '</th>';
+                        }
+                        tableHtml += '</tr>';
+
+                        var timeSlots = [
+                            '09:00 AM', '09:15 AM', '09:30 AM', '09:45 AM',
+                            '10:00 AM', '10:15 AM', '10:30 AM', '10:45 AM',
+                            '11:00 AM', '11:15 AM', '11:30 AM', '11:45 AM',
+                            '12:00 PM', '12:15 PM', '12:30 PM', '12:45 PM',
+                            '01:00 PM', '01:15 PM', '01:30 PM', '01:45 PM',
+                            '02:00 PM', '02:15 PM', '02:30 PM', '02:45 PM',
+                            '03:00 PM', '03:15 PM', '03:30 PM', '03:45 PM',
+                            '04:00 PM', '04:15 PM', '04:30 PM', '04:45 PM',
+                            '05:00 PM', '05:15 PM', '05:30 PM', '05:45 PM',
+                            '06:00 PM', '06:15 PM', '06:30 PM', '06:45 PM',
+                            '07:00 PM', '07:15 PM', '07:30 PM', '07:45 PM',
+                            '08:00 PM', '08:15 PM', '08:30 PM', '08:45 PM',
+                            '09:00 PM'
+                        ];
+
+                        timeSlots.forEach(function(slot) {
+                            tableHtml += '<tr><td class="result-slot">' + slot +
+                            '</td>';
+                            for (var day = 1; day <= 31; day++) {
+                                var draw = response.find(d => d.draw_time === slot &&
+                                    new Date(d.date).getDate() === day);
+                                tableHtml += '<td>' + (draw ? draw.result : '-') +
+                                    '</td>';
+                            }
+                            tableHtml += '</tr>';
+                        });
+
+                        tableHtml += '</table>';
+                        $('#resultsTable').html(tableHtml);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error fetching results:", error);
+                        $('#resultsTable').html(
+                            '<p>Error fetching results. Please try again.</p>');
+                    }
+                });
+            });
+        });
+    </script>
 
 @endsection

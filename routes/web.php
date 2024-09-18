@@ -15,7 +15,7 @@ Route::get('/month-result', [HomeController::class, 'MonthResult'])->name('websi
 
 
 Route::get('/get-draws', [HomeController::class, 'getDrawsByDate']);
-
+Route::get('/get-monthly-draws', [HomeController::class, 'getMonthlyDraws']);
 
 // Route::get('/login', function () {
 //     return redirect('/admin/login');
