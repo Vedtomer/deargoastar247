@@ -18,11 +18,11 @@
         }
 
         .date-input {
-            padding: 10px;
+            padding: 5px;
             font-size: 16px;
             border: 1px solid #0056b3;
             border-radius: 4px;
-            margin-right: 10px;
+            /* margin-right: 10px; */
         }
 
         .refresh-btn {
@@ -403,13 +403,13 @@
                 // Display the latest result in the specified IDs
                 if (processedDraws.length > 0 && isToday(new Date(selectedDate.value)) && isBeforeNineThirtyPM()) {
                     const latestDraw = processedDraws[processedDraws.length - 1]; // Get the last result
-
+                    const firstDraw = processedDraws[0]; // Get the first result
                     // Set the latest draw data in the respective spans
-                    document.getElementById('result_time').textContent = latestDraw.draw_time;
+                    document.getElementById('result_time').textContent = firstDraw.draw_time;
                     document.getElementById('latest_result1').textContent =
-                        `${formatNumber(latestDraw.a)}${formatNumber(latestDraw.b)}`;
+                        `${formatNumber(firstDraw.a)}${formatNumber(firstDraw.b)}`;
                     document.getElementById('latest_result2').textContent =
-                        `${formatNumber(latestDraw.c)}${formatNumber(latestDraw.d)}`;
+                        `${formatNumber(firstDraw.c)}${formatNumber(firstDraw.d)}`;
                 } else {
                     // If no draws are available, set default text
                     document.getElementById('result_time').textContent = '-';

@@ -42,14 +42,14 @@ class HomeController extends Controller
 
         $query = Draw::select('id', 'draw_time', 'date', 'a', 'b','c','d', 'created_at', 'updated_at')
             ->whereDate('date', $date)
-            ->orderBy('id','asc');
+            ->orderBy('id','desc');
 
         if ($requestedDate->isToday()) {
            // Log::info("Filtering draws for today: " . $date);
             $draws = $query->get()->filter(function ($draw) use ($currentTime) {
                 $drawDateTime = Carbon::createFromFormat('Y-m-d h:i A', $draw->date . ' ' . $draw->draw_time);
               //  Log::info("Draw DateTime: " . $drawDateTime->format('Y-m-d h:i A') . " | Current Time: " . $currentTime->format('Y-m-d h:i A'));
-                return $drawDateTime->addSeconds(20)->lessThanOrEqualTo($currentTime);
+                return $drawDateTime->addSeconds(15)->lessThanOrEqualTo($currentTime);
             });
         } else {
          //   Log::info("Returning all draws for past date: " . $date);
