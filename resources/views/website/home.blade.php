@@ -468,16 +468,15 @@
             const currentTime = new Date();
             const drawTimes = [];
 
-            // Generate all draw times for the day
+            // Generate all draw times for the day at 15-minute intervals
             for (let hour = 9; hour <= 21; hour++) {
-                drawTimes.push(new Date(currentTime.getFullYear(), currentTime.getMonth(), currentTime.getDate(), hour, 0,
-                    0, 0));
-                drawTimes.push(new Date(currentTime.getFullYear(), currentTime.getMonth(), currentTime.getDate(), hour, 15,
-                    0, 0));
+                for (let minute = 0; minute < 60; minute += 15) {
+                    drawTimes.push(new Date(currentTime.getFullYear(), currentTime.getMonth(), currentTime.getDate(), hour,
+                        minute, 0, 0));
+                }
             }
 
             // Find the next draw time
-            // console.log(drawTimes);
             let nextDrawTime = drawTimes.find(time => time > currentTime);
 
             // If no draw time found today, set it to the first draw time tomorrow
@@ -504,28 +503,27 @@
             const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
 
-            const remainingTimeString = `${padZero(hours)} : ${padZero(minutes)} : ${padZero(seconds)}`;
+            const remainingTimeString = `${padZero(hours)}:${padZero(minutes)}:${padZero(seconds)}`;
 
-            // document.getElementById('draw-time-info').innerText =
-            //     `Next Draw Time: ${nextDrawTimeString} | ${remainingTimeString}`;
+            // Update the next draw time display
+            const nextDrawTimeElement = document.getElementById('NextDrawTime');
+            if (nextDrawTimeElement) {
+                nextDrawTimeElement.innerText = `: ${nextDrawTimeString}`;
+            }
 
-
-            document.getElementById('NextDrawTime').innerText =
-                `: ${nextDrawTimeString}`;
-
-            // document.getElementById('result_time').innerText =
-            //     ` ${nextDrawTimeString}`;
-
-
-            document.getElementById('RemainingTime').innerText =
-                `: ${remainingTimeString}`;
+            // Update the remaining time display
+            const remainingTimeElement = document.getElementById('RemainingTime');
+            if (remainingTimeElement) {
+                remainingTimeElement.innerText = `: ${remainingTimeString}`;
+            }
 
             // Update remaining time every second
             setTimeout(() => updateRemainingTime(nextDrawTime, nextDrawTimeString), 1000);
         }
 
-        function padZero(number) {
-            return number < 10 ? '0' + number : number;
+        // Helper function to pad single digit numbers with a leading zero
+        function padZero(num) {
+            return num.toString().padStart(2, '0');
         }
 
         // Initialize the function on page load
