@@ -4,7 +4,18 @@
     <style>
 
 table{
+    font-family: sans-serif;
+    color: yellow;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: #05255c;
+    border: 2px solid yellow;
     width: 100%;
+}
+
+
+td.result-slot {
+    font-family: sans-serif; color: yellow; font-size: 15px; font-weight: bold; background-color: #05255c;border:2px solid yellow;
 }
 
        th,
@@ -44,7 +55,7 @@ table{
 
 
     </style>
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
 @endsection
 
 @section('content')
@@ -286,7 +297,7 @@ table{
                     },
                     success: function(response) {
                         var tableHtml = '<table>';
-                        tableHtml += '<tr><th>Result Slot</th>';
+                        tableHtml += '<tr><th style=" font-family: sans-serif; color: yellow; font-size: 15px; font-weight: bold; background-color: #05255c;border:2px solid yellow;">Result Slot</th>';
                         for (var i = 1; i <= 31; i++) {
                             tableHtml += '<th>' + i + '</th>';
                         }
@@ -314,7 +325,7 @@ table{
                             for (var day = 1; day <= 31; day++) {
                                 var draw = response.find(d => d.draw_time === slot &&
                                     new Date(d.date).getDate() === day);
-                                tableHtml += '<td>' + (draw ? draw.result : '-') +
+                                tableHtml += '<td style=" font-family: sans-serif; color: white; font-size: 13px; font-weight: bold; background-color: #2056E6;border:2px solid yellow;">' + (draw ? draw.result : '-') +
                                     '</td>';
                             }
                             tableHtml += '</tr>';
