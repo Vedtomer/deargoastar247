@@ -1,34 +1,59 @@
 @extends('website.layouts.app')
 
 @section('styles')
+
+<style>
+    .container {
+        max-width: 100%;
+        overflow-x: auto;
+    }
+    #resultsTable {
+        width: 100%;
+    }
+    table {
+        font-family: sans-serif;
+        color: yellow;
+        font-size: 15px;
+        font-weight: bold;
+        background-color: #05255c;
+        border: 2px solid yellow;
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        border: 1px solid black;
+        padding: 5px;
+        text-align: center;
+        min-width: 50px;
+    }
+    th {
+        background-color: #003366;
+        color: white;
+        position: sticky;
+        top: 0;
+        z-index: 2;
+    }
+    th:first-child {
+        z-index: 3;
+    }
+    td.result-slot {
+        font-family: sans-serif;
+        color: yellow;
+        font-size: 15px;
+        font-weight: bold;
+        background-color: #05255c;
+        border: 2px solid yellow;
+        position: sticky;
+        left: 0;
+        z-index: 1;
+    }
+    td {
+        background-color: #05255c;
+        color: yellow;
+    }
+</style>
     <style>
 
-table{
-    font-family: sans-serif;
-    color: yellow;
-    font-size: 15px;
-    font-weight: bold;
-    background-color: #05255c;
-    border: 2px solid yellow;
-    width: 100%;
-}
-
-
-td.result-slot {
-    font-family: sans-serif; color: yellow; font-size: 15px; font-weight: bold; background-color: #05255c;border:2px solid yellow;
-}
-
-       th,
-        td {
-            border: 1px solid black;
-            padding: 5px;
-            text-align: center;
-        }
-
-        th {
-            background-color: #003366;
-            color: white;
-        }
 
         .result-slot {
             background-color: #003366;
@@ -275,9 +300,8 @@ td.result-slot {
 
 
     <div class="container">
-
-    <div id="resultsTable"></div>
-        </div>
+        <div id="resultsTable"></div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
