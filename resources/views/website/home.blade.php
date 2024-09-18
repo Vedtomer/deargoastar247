@@ -492,7 +492,10 @@
             });
             updateRemainingTime(nextDrawTime, nextDrawTimeString);
 
-            setTimeout(updateNextDrawTime, 60000); // Refresh every minute
+            // Schedule the next update and page reload
+            setTimeout(() => {
+                location.reload(); // Reload the page
+            }, 60000); // Refresh every minute
         }
 
         function updateRemainingTime(nextDrawTime, nextDrawTimeString) {
