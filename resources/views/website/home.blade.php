@@ -437,7 +437,7 @@
                     .catch(error => {
                         console.error('Error:', error);
                         hideLoader();
-                        alert('An error occurred while fetching data.');
+                        //alert('An error occurred while fetching data.');
                     });
             }
 
