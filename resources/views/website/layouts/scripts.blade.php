@@ -181,40 +181,68 @@
 
 
 <script>
+    const drawTimes = [
+        '09:00 AM', '09:15 AM', '09:30 AM', '09:45 AM',
+        '10:00 AM', '10:15 AM', '10:30 AM', '10:45 AM',
+        '11:00 AM', '11:15 AM', '11:30 AM', '11:45 AM',
+        '12:00 PM', '12:15 PM', '12:30 PM', '12:45 PM',
+        '01:00 PM', '01:15 PM', '01:30 PM', '01:45 PM',
+        '02:00 PM', '02:15 PM', '02:30 PM', '02:45 PM',
+        '03:00 PM', '03:15 PM', '03:30 PM', '03:45 PM',
+        '04:00 PM', '04:15 PM', '04:30 PM', '04:45 PM',
+        '05:00 PM', '05:15 PM', '05:30 PM', '05:45 PM',
+        '06:00 PM', '06:15 PM', '06:30 PM', '06:45 PM',
+        '07:00 PM', '07:15 PM', '07:30 PM', '07:45 PM',
+        '08:00 PM', '08:15 PM', '08:30 PM', '08:45 PM',
+        '09:00 PM'
+    ];
+
     function updateNextDrawTime() {
         const currentTime = new Date();
-        let nextDrawTime;
-
-        // Set the draw times
-        const morningDrawTime = new Date(currentTime.getFullYear(), currentTime.getMonth(), currentTime.getDate(), 9, 0,
-            0, 0);
-        const eveningDrawTime = new Date(currentTime.getFullYear(), currentTime.getMonth(), currentTime.getDate(), 21,
-            0, 0, 0);
-
-        // Determine the next draw time
-        if (currentTime > eveningDrawTime) {
-            // If it's past 9 PM, set next draw time to 9 AM tomorrow
-            nextDrawTime = new Date(currentTime.getFullYear(), currentTime.getMonth(), currentTime.getDate() + 1, 9, 0,
-                0, 0);
-        } else if (currentTime < morningDrawTime) {
-            // If it's before 9 AM, set next draw time to 9 AM today
-            nextDrawTime = morningDrawTime;
-        } else {
-            // If it's between 9 AM and 9 PM, set next draw time to 9 PM today
-            nextDrawTime = eveningDrawTime;
-        }
+        let nextDrawTime = getNextDrawTime(currentTime);
 
         const nextDrawTimeString = nextDrawTime.toLocaleTimeString([], {
             hour: '2-digit',
             minute: '2-digit',
             hour12: true
         });
+
         updateRemainingTime(nextDrawTime, nextDrawTimeString);
 
-        // Schedule the next update and page reload
-        setTimeout(() => {
-            location.reload(); // Reload the page
-        }, 60000); // Refresh every minute
+        // Schedule the next update
+        setTimeout(updateNextDrawTime, 60000); // Update every minute
+    }
+
+    function getNextDrawTime(currentTime) {
+        const currentHour = currentTime.getHours();
+        const currentMinute = currentTime.getMinutes();
+
+        // If it's past 9 PM, set next draw time to 9 AM tomorrow
+        if (currentHour >= 21) {
+            return new Date(currentTime.getFullYear(), currentTime.getMonth(), currentTime.getDate() + 1, 9, 0, 0, 0);
+        }
+
+        // Find the next draw time
+        for (let time of drawTimes) {
+            const [hours, minutes, period] = time.match(/(\d+):(\d+) (\w+)/).slice(1);
+            let drawHour = parseInt(hours);
+            const drawMinute = parseInt(minutes);
+
+            if (period === 'PM' && drawHour !== 12) {
+                drawHour += 12;
+            }
+            if (period === 'AM' && drawHour === 12) {
+                drawHour = 0;
+            }
+
+            if (drawHour > currentHour || (drawHour === currentHour && drawMinute > currentMinute)) {
+                return new Date(currentTime.getFullYear(), currentTime.getMonth(), currentTime.getDate(), drawHour,
+                    drawMinute, 0, 0);
+            }
+        }
+
+        // If no time found (shouldn't happen with the given range), return 9 AM tomorrow
+        return new Date(currentTime.getFullYear(), currentTime.getMonth(), currentTime.getDate() + 1, 9, 0, 0, 0);
     }
 
     function updateRemainingTime(nextDrawTime, nextDrawTimeString) {
