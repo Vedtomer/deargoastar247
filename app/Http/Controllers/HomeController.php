@@ -108,6 +108,7 @@ class HomeController extends Controller
             return $draw->toArray();
         });
     }
+
     public function getMonthlyDraws(Request $request)
     {
         $month = $request->input('month');
@@ -137,18 +138,30 @@ class HomeController extends Controller
             $query->select('id', 'draw_time', 'date', 'a', 'b', 'c', 'd');
         }
 
-        $query->where(function ($q) use ($now) {
-            $q->where('date', '<', $now->toDateString())
-              ->orWhere(function ($q) use ($now) {
-                  $q->where('date', '=', $now->toDateString())
-                    ->where('draw_time', '<=', $now->subSeconds(20)->format('H:i:s'));
-              });
+        $draws = $query->get();
+
+        // Filter draws based on the current time for the current month
+        $filteredDraws = $draws->filter(function ($draw) use ($now) {
+            try {
+                $drawDateTime = Carbon::createFromFormat('Y-m-d H:i:s', $draw->date . ' ' . $draw->draw_time);
+            } catch (\Exception $e) {
+                // If the format is invalid, try an alternative format
+                try {
+                    $drawDateTime = Carbon::createFromFormat('Y-m-d h:i A', $draw->date . ' ' . $draw->draw_time);
+                } catch (\Exception $e) {
+                    // If both formats fail, log the error and skip this draw
+                    \Log::error("Invalid date/time format for draw ID {$draw->id}: {$draw->date} {$draw->draw_time}");
+                    return false;
+                }
+            }
+            return $drawDateTime->addSeconds(15)->lessThanOrEqualTo($now);
         });
 
-        $draws = $query->orderBy('date')
-            ->orderBy('draw_time')
-            ->get();
+        // Convert each draw to an array
+        $result = $filteredDraws->map(function ($draw) {
+            return $draw->toArray();
+        });
 
-        return response()->json($draws);
+        return response()->json($result);
     }
 }
