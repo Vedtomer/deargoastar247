@@ -58,22 +58,22 @@
                     <div class="col-md-6">
                         <label for="a" class="form-label">A <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="a" name="a"
-                            value="{{ substr($draw->a, -2) }}" required maxlength="2">
+                            value="{{ substr($draw->a, -2) }}" required maxlength="1">
                     </div>
                     <div class="col-md-6">
                         <label for="b" class="form-label">B <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="b" name="b"
-                            value="{{ substr($draw->b, -2) }}" required maxlength="2">
+                            value="{{ substr($draw->b, -2) }}" required maxlength="1">
                     </div>
                     <div class="col-md-6">
                         <label for="c" class="form-label">C <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="c" name="c"
-                            value="{{ substr($draw->c, -2) }}" required maxlength="2">
+                            value="{{ substr($draw->c, -2) }}" required maxlength="1">
                     </div>
                     <div class="col-md-6">
                         <label for="d" class="form-label">D <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="d" name="d"
-                            value="{{ substr($draw->d, -2) }}" required maxlength="2">
+                            value="{{ substr($draw->d, -2) }}" required maxlength="1">
                     </div>
                     {{-- <div class="col-md-6">
                         <label for="e" class="form-label">E <span class="text-danger">*</span></label>
@@ -117,29 +117,31 @@
 </div>
 
 <script>
+    // function enforceTwoDigitInput(event) {
+
     function enforceTwoDigitInput(event) {
         var input = event.target;
         // Remove any non-numeric characters
         input.value = input.value.replace(/[^0-9]/g, '');
-        // Limit the length to 2 characters
-        if (input.value.length > 2) {
-            input.value = input.value.slice(0, 2);
+        // Limit the length to 1 character
+        if (input.value.length > 1) {
+            input.value = input.value.slice(0, 1);
         }
     }
 
-    // Add event listeners for all fields
-    ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'].forEach(function(id) {
-        document.getElementById(id).addEventListener('input', enforceTwoDigitInput);
+    // Add event listeners for fields a, b, c, d
+    ['a', 'b', 'c', 'd'].forEach(function(id) {
+        document.getElementById(id).addEventListener('input', enforceOneDigitInput);
     });
 
     document.getElementById('editDrawForm').addEventListener('submit', function(event) {
-        var isValid = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'].every(function(id) {
-            return document.getElementById(id).value.length === 2;
+        var isValid = ['a', 'b', 'c', 'd'].every(function(id) {
+            return document.getElementById(id).value.length === 1;
         });
 
         if (!isValid) {
             event.preventDefault();
-            alert('Please enter valid two-digit numbers for all fields from A to J.');
+            alert('Please enter valid one-digit numbers for fields A, B, C, and D.');
         }
     });
 </script>

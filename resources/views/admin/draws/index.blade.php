@@ -22,7 +22,7 @@
 
                         </div>
                     </div>
-                    <table class="display table dt-table-hover" style="width:100%">
+                    <table class="display table dt-table-hover" >
                         <thead>
                             <tr>
                                 <th>Time</th>
@@ -30,12 +30,7 @@
                                 <th>B</th>
                                 <th>C</th>
                                 <th>D</th>
-                                <th>E</th>
-                                <th>F</th>
-                                <th>G</th>
-                                <th>H</th>
-                                <th>I</th>
-                                <th>J</th>
+
                                 <th class="text-center dt-no-sorting">Action</th>
                             </tr>
                         </thead>
@@ -44,16 +39,10 @@
                                 <tr>
                                     <td>{{ $draw->draw_time }}</td>
 
-                                    <td>{{ sprintf('%02d', $draw->a) }}</td>
-                                    <td>{{ sprintf('%02d', $draw->b) }}</td>
-                                    <td>{{ sprintf('%02d', $draw->c) }}</td>
-                                    <td>{{ sprintf('%02d', $draw->d) }}</td>
-                                    <td>{{ sprintf('%02d', $draw->e) }}</td>
-                                    <td>{{ sprintf('%02d', $draw->f) }}</td>
-                                    <td>{{ sprintf('%02d', $draw->g) }}</td>
-                                    <td>{{ sprintf('%02d', $draw->h) }}</td>
-                                    <td>{{ sprintf('%02d', $draw->i) }}</td>
-                                    <td>{{ sprintf('%02d', $draw->j) }}</td>
+                                    <td>{{  $draw->a }}</td>
+                                    <td>{{  $draw->b }}</td>
+                                    <td>{{  $draw->c }}</td>
+                                    <td>{{  $draw->d }}</td>
 
                                     {{-- <td>{{ $draw->c }}</td>
                                     <td>{{ $draw->d }}</td> --}}
@@ -104,12 +93,7 @@
                                 <th>B</th>
                                 <th>C</th>
                                 <th>D</th>
-                                <th>E</th>
-                                <th>F</th>
-                                <th>G</th>
-                                <th>H</th>
-                                <th>I</th>
-                                <th>J</th>
+
                                 <th class="text-center">Action</th>
                             </tr>
                         </tfoot>
