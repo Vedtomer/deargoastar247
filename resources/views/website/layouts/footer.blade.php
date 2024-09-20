@@ -3,7 +3,7 @@
         <div class="w-layout-blockcontainer main-container w-container">
             <div data-w-id="c2d7c88f-4c18-6b15-3ea1-fcf4b6ca80c4" class="footer-flex">
                 <div class="footer-about-column"><a href="/home/home-one" class="footer-logo-wrap w-inline-block"><img src="{{ asset('asset/website/images/logo.png') }}" loading="lazy" alt="Logo" class="footer-logo" /></a>
-                    <div class="footer-excerpt">Insurance can be difficult hard. Social Engineer Insurance makes it
+                    <div class="footer-excerpt">Insurance can be difficult hard. Dear Goa Star247 makes it
                         easy.</div>
 
                     <div class="footer-contact-info-wrap"><a href="tel:919728786086" class="footer-contact-number">+91
@@ -42,7 +42,7 @@
     <div class="footer-lower-section">
         <div class="w-layout-blockcontainer main-container w-container">
             <div class="footer-copyright-block">
-                <div class="footer-copyright-text">Copyright © 2024 <a href="https://socialengineerinsurance.com" class="copyright-link"><strong class="bold-text">Social Engineer Insurance </strong></a>
+                <div class="footer-copyright-text">Copyright © 2024 <a href="https://socialengineerinsurance.com" class="copyright-link"><strong class="bold-text">Dear Goa Star247 </strong></a>
                     {{-- | Designed by
                     <a href="https://brandbes.com/" target="_blank" class="copyright-link"><strong
                             class="bold-text">Brandbes</strong></a> - Powered by - <a

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-    <title>Admin | Social Engineer Insurance </title>
+    <title>Admin | Dear Goa Star247 </title>
     <link rel="icon" type="image/x-icon" href="{{ asset('asset/admin/images/favicon.ico') }}"/>
     <link href="{{ asset('asset/admin/css/light/loader.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('asset/admin/css/dark/loader.css') }}" rel="stylesheet" type="text/css" />
@@ -13,14 +13,14 @@
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
     <link href="{{ asset('asset/admin/css/bootstrap/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-    
+
     <link href="{{ asset('asset/admin/css/light/plugins.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('asset/admin/css/light/auth-boxed.css') }}" rel="stylesheet" type="text/css" />
-    
+
     <link href="{{ asset('asset/admin/css/dark/plugins.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('asset/admin/css/dark/auth-boxed.css') }}" rel="stylesheet" type="text/css" />
     <!-- END GLOBAL MANDATORY STYLES -->
-    
+
 </head>
 <body class="form">
 
@@ -36,17 +36,17 @@
             <form action="" method="POST">
                 @csrf
         <div class="row">
-            
+
             <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-8 col-12 d-flex flex-column align-self-center mx-auto">
                 <div class="card mt-3 mb-3">
                     <div class="card-body">
-    
+
                             <div class="row">
                                 <div class="col-md-12 mb-3">
-                                    
+
                                     <h2>Sign In</h2>
                                     <p>Enter your email and password to login</p>
-                                    
+
                                 </div>
 
                                 <div class="col-md-12">
@@ -71,27 +71,27 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-12">
                                     <div class="mb-4">
                                         <button class="btn btn-secondary w-100">SIGN IN</button>
                                     </div>
                                 </div>
-                                
-                                
+
+
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
-                
+
             </div>
-            
+
         </div>
         </form>
 
     </div>
-    
+
     <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
     <script src="{{ asset('asset/admin/js/bootstrap.bundle.min.js') }}"></script>
     <!-- END GLOBAL MANDATORY SCRIPTS -->
