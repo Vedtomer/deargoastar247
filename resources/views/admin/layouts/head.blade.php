@@ -2,9 +2,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-    <title>CORK Admin - Multipurpose Bootstrap Dashboard Template </title>
+    <title>Admin : Deargoastar247  </title>
     <link rel="icon" type="image/x-icon" href="{{ asset('asset/admin/images/favicon.ico') }}" />
-
+    <meta name="robots" content="noindex, nofollow">
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     <link href="{{ asset('asset/admin/layouts/modern-dark-menu/css/light/loader.css') }}" rel="stylesheet"
         type="text/css" />

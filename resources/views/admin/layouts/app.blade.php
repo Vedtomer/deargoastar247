@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html data-wf-domain="https://socialengineerinsurance.com" data-wf-page="65b60c5eef338f6b2401686d"
-    data-wf-site="65b60c5def338f6b24016820" lang="en">
+<html  lang="en">
 @include('admin.layouts.head')
 
 <body class="layout-boxed" page="starter-pack">
