@@ -28,7 +28,7 @@
                         <div class="col-md-6">
                             <label for="draw_time" class="form-label">Time <span class="text-danger">*</span></label>
                             <select class="select2 form-select customer form-control" id="draw_time" name="draw_time"
-                                aria-label="Select Time" required readonly>
+                                aria-label="Select Time" required disabled>
                                 <option value="">Select Time</option>
                                 @for ($hour = 9; $hour <= 21; $hour++)
                                     @for ($minute = 0; $minute < 60; $minute += 15)
