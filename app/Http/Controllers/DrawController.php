@@ -151,7 +151,7 @@ class DrawController extends Controller
 
         $draw_time = date('h:i A', strtotime($request->draw_time));
         $draw->update([
-            'draw_time' => $draw_time,
+            // 'draw_time' => $draw_time,
             'date' => $request->date,
             'a' =>   $request->a,
             'b' =>   $request->b,
