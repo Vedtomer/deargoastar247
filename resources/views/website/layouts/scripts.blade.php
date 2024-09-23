@@ -81,66 +81,65 @@
         }
 
         function updateTable(draws) {
-            const processedDraws = processDraws(draws);
+    const processedDraws = processDraws(draws);
 
-            // Populate the table with rows
-            tableBody.innerHTML = processedDraws.length > 0 ?
-                processedDraws.map((draw, index) => `
-            <tr>
-                <th>${draw.draw_time}</th>
-                <td class='samecolor'>${formatNumber(draw.a)}${formatNumber(draw.b)}</td>
-                <td class='samecolor2'>${formatNumber(draw.c)}${formatNumber(draw.d)}</td>
-            </tr>
-        `).join('') :
-                '<tr><td colspan="3">No data available</td></tr>';
+    // Populate the table with rows
+    tableBody.innerHTML = processedDraws.length > 0 ?
+        processedDraws.map((draw, index) => `
+        <tr style="background-color: #fff; "><th style="background-color: #fff !important; "></th><td></td><td></td></tr>
+        <tr>
+            <th style=" color: yellow; font-family: sans-serif; background-color: #003399; padding: 8px;font-size:large">${draw.draw_time}</th>
+            <td class='samecolor'>${formatNumber(draw.a)}${formatNumber(draw.b)}</td>
+            <td class='samecolor2'>${formatNumber(draw.c)}${formatNumber(draw.d)}</td>
+        </tr>
+    `).join('') :
+        '<tr><td colspan="3">No data available</td></tr>';
 
-            // Apply styles to the table after the rows are inserted
-            const rows = tableBody.querySelectorAll('tr');
+    // Apply styles to the table after the rows are inserted
+    const rows = tableBody.querySelectorAll('tr');
 
-            rows.forEach((row, rowIndex) => {
-                const th = row.querySelector('th');
-                const tds = row.querySelectorAll('td');
+    rows.forEach((row, rowIndex) => {
+        const th = row.querySelector('th');
+        const tds = row.querySelectorAll('td');
 
-                // Apply color to <th> elements
-                th.style.backgroundColor = rowIndex % 2 === 0 ? '#2905ff' : '#2905ff';
-                th.style.color = rowIndex % 2 === 0 ? '#FFFFFF' : '#FFFFFF';
+        // Apply color to <th> elements
+        //th.style.backgroundColor = '#003399';
+        th.style.color = 'yellow';
+        th.style.fontWeight = 'bold';
 
-                // Determine the background color for 'samecolor' cells based on row index
-                const sameColorBg = rowIndex % 2 === 0 ? '#fea500' : '#fea500';
-                const sameColorBg2 = rowIndex % 2 === 0 ? '#2905ff' : '#2905ff';
+        // Apply color to <td> elements
+        tds.forEach(td => {
+            // td.style.padding = '8px';
+            td.style.textAlign = 'center';
+            td.style.fontFamily = 'sans-serif';
+            // td.style.fontSize = '16px';
+            // td.style.fontWeight = 'bold';
 
-                // Apply color to <td> elements
-                tds.forEach(td => {
-                    if (td.classList.contains('samecolor')) {
-                        td.style.backgroundColor = sameColorBg;
-                    }
-                });
-
-                tds.forEach(td => {
-                    if (td.classList.contains('samecolor2')) {
-                        td.style.backgroundColor = sameColorBg2;
-                        td.style.color = rowIndex % 2 === 0 ? '#FFFFFF' : '#FFFFFF';
-                    }
-                });
-            });
-
-
-            if (processedDraws.length > 0 && isToday(new Date(selectedDate.value)) && isBeforeNineThirtyPM()) {
-                const latestDraw = processedDraws[processedDraws.length - 1]; // Get the last result
-                const firstDraw = processedDraws[0]; // Get the first result
-                // Set the latest draw data in the respective spans
-                document.getElementById('result_time').textContent = firstDraw.draw_time;
-                document.getElementById('latest_result1').textContent =
-                    `${formatNumber(firstDraw.a)}${formatNumber(firstDraw.b)}`;
-                document.getElementById('latest_result2').textContent =
-                    `${formatNumber(firstDraw.c)}${formatNumber(firstDraw.d)}`;
-            } else {
-                // If no draws are available, set default text
-                document.getElementById('result_time').textContent = '-';
-                document.getElementById('latest_result1').textContent = '-';
-                document.getElementById('latest_result2').textContent = '-';
+            if (td.classList.contains('samecolor')) {
+                td.style.backgroundColor = '#2056E6';
+                td.style.color = 'white';
+            } else if (td.classList.contains('samecolor2')) {
+                td.style.backgroundColor = '#004C99';
+                td.style.color = 'white';
             }
-        }
+        });
+    });
+
+    if (processedDraws.length > 0 && isToday(new Date(selectedDate.value)) && isBeforeNineThirtyPM()) {
+        const latestDraw = processedDraws[0]; // Get the first result (most recent)
+        // Set the latest draw data in the respective spans
+        document.getElementById('result_time').textContent = latestDraw.draw_time;
+        document.getElementById('latest_result1').textContent =
+            `${formatNumber(latestDraw.a)}${formatNumber(latestDraw.b)}`;
+        document.getElementById('latest_result2').textContent =
+            `${formatNumber(latestDraw.c)}${formatNumber(latestDraw.d)}${formatNumber(latestDraw.e)}`;
+    } else {
+        // If no draws are available, set default text
+        document.getElementById('result_time').textContent = '-';
+        document.getElementById('latest_result1').textContent = '-';
+        document.getElementById('latest_result2').textContent = '-';
+    }
+}
 
         function fetchDraws(date) {
             showLoader();

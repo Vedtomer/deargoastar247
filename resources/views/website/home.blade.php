@@ -41,23 +41,23 @@
 
         #dataTable {
             width: 100%;
-            border-collapse: separate;
-            border-spacing: 3px;
+            /* border-collapse: separate;
+            border-spacing: 3px; */
             font-size: 18px;
         }
 
         #dataTable th,
         #dataTable td {
-            border: 2px solid #FFD700;
+            /* border: 2px solid #FFD700; */
             padding: 10px;
             text-align: center;
         }
 
         #dataTable thead th {
-            background-color: #808080;
+            background-color: #004C99;;
             color: white;
             font-size: 20px;
-            border-bottom: 4px solid #FFD700;
+            /* border-bottom: 4px solid #FFD700; */
         }
 
         td {
@@ -75,8 +75,13 @@
             }
 
             #dataTable th {
-                font-size: 16px;
+                font-size: large;
             }
+
+            #dataTable td {
+                font-size: xx-large !important;
+            }
+
         }
 
         .btn-g20 {
@@ -189,7 +194,7 @@
                         <tr>
 
                             <td
-                                style=" font-family: sans-serif; color: white; font-size: xx-large; font-weight: bold; background-color: #2905ff;">
+                                style="">
                                 <span id="result_time" style="" class="text-uppercase"></span>
                             </td>
 
@@ -283,12 +288,12 @@
             </div>
         </div>
 
-        <div class="table-container">
+        <div class="table-container" style="padding-top: auto; font-family: sans-serif; background-color:  #004C99;">
             <table id="dataTable" style="display: none;">
                 <thead>
                     <tr>
                         <th>Time</th>
-                        <th>गोल्डन लक्ष्मी</th>
+                        <th style="  background-color: #2056E6;">गोल्डन लक्ष्मी</th>
                         <th>शुभ लक्ष्मी</th>
                     </tr>
                 </thead>
