@@ -132,7 +132,7 @@
         document.getElementById('latest_result1').textContent =
             `${formatNumber(latestDraw.a)}${formatNumber(latestDraw.b)}`;
         document.getElementById('latest_result2').textContent =
-            `${formatNumber(latestDraw.c)}${formatNumber(latestDraw.d)}${formatNumber(latestDraw.e)}`;
+            `${formatNumber(latestDraw.c)}${formatNumber(latestDraw.d)}`;
     } else {
         // If no draws are available, set default text
         document.getElementById('result_time').textContent = '-';
