@@ -100,7 +100,7 @@
         <marquee id="a" scrollamount="3" onmouseover="this.stop();" onmouseout="this.start();"
             style=" font-family:Verdana; font-weight: bold;    background-color: seashell; color: #E13300; margin-top: 5px; padding-bottom:2px; ">
 
-            WELCOME TO DEAR GOA STAR 9892478001
+            WELCOME TO DEAR GOA STAR 02269710251
 
         </marquee>
 
